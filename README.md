@@ -6,7 +6,7 @@ iOS number keyboards don't have a dismiss key. This plugin solves that.
 
 ## Demo
 
-![Demo](https://github.com/user-attachments/assets/781c7b59-3b0d-4083-b7fd-88dd0fd7cb33)
+![Demo](https://raw.githubusercontent.com/bgpworks/ios-native-done-button/main/doc/prototype.gif)
 
 ## Installation
 
