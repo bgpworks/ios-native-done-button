@@ -36,20 +36,28 @@ class DemoPage extends StatelessWidget {
                 'Without Done Button',
                 'Text keyboard has Return key',
               ),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  border: OutlineInputBorder(),
+              // Use KeyboardToolbarField with showToolbar: false
+              // to explicitly hide toolbar when switching from number fields
+              KeyboardToolbarField(
+                showToolbar: false,
+                child: const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.text,
                 ),
-                keyboardType: TextInputType.text,
               ),
               const SizedBox(height: 12),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
+              KeyboardToolbarField(
+                showToolbar: false,
+                child: const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
                 ),
-                keyboardType: TextInputType.emailAddress,
               ),
 
               const SizedBox(height: 32),
@@ -61,34 +69,38 @@ class DemoPage extends StatelessWidget {
                 'With Done Button',
                 'Number keyboard has no dismiss key',
               ),
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Phone',
-                  border: OutlineInputBorder(),
+              // Use KeyboardToolbarField widget (recommended)
+              KeyboardToolbarField(
+                child: const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Phone',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.phone,
                 ),
-                keyboardType: TextInputType.number,
-                onTap: () => KeyboardToolbar.show(),
               ),
               const SizedBox(height: 12),
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Age',
-                  border: OutlineInputBorder(),
+              KeyboardToolbarField(
+                child: const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Age',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.number,
                 ),
-                keyboardType: TextInputType.number,
-                onTap: () => KeyboardToolbar.show(),
               ),
               const SizedBox(height: 12),
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Price',
-                  prefixText: '\$ ',
-                  border: OutlineInputBorder(),
+              KeyboardToolbarField(
+                child: TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Price',
+                    prefixText: '\$ ',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
                 ),
-                keyboardType: const TextInputType.numberWithOptions(
-                  decimal: true,
-                ),
-                onTap: () => KeyboardToolbar.show(),
               ),
             ],
           ),
