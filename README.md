@@ -1,73 +1,73 @@
 # keyboard_done_button_ios
 
-A Flutter plugin that displays a **Done** button toolbar above the iOS keyboard.
+A Flutter plugin that adds a **Done** button toolbar above iOS keyboards.
 
-## Overview
+iOS number keyboards don't have a dismiss key. This plugin solves that.
 
-On iOS, number keyboards (`TextInputType.number`) don't have a built-in key to dismiss the keyboard. This plugin solves that problem by showing a toolbar with a "Done" button above the keyboard.
+## Demo
 
-**Features**
-- Displays a native-style toolbar with Done button
-- Localized: shows "Done" or "완료" based on system language
-- Smooth fade animation synchronized with keyboard
-- Rotation support: toolbar persists when device rotates
-- Zero configuration required
+https://github.com/user-attachments/assets/28802bed-ecb5-403e-9bba-bccda5c19620
 
-**Platform Support**
-
-| Platform | Support |
-|----------|---------|
-| iOS (iPhone) | ✅ |
-| iOS (iPad) | ⏭️ Skipped (has built-in Done button) |
-| Android | ➖ No-op (safe to call) |
-
-## Usage
-
-### Installation
+## Installation
 
 ```yaml
 dependencies:
   keyboard_done_button_ios: ^0.0.1
 ```
 
-### Basic Usage
+## Usage
 
-Call `KeyboardToolbar.show()` in the `onTap` callback of your TextField:
+Wrap your TextField with `KeyboardToolbarField`:
 
 ```dart
 import 'package:keyboard_done_button_ios/keyboard_done_button_ios.dart';
 
+// Shows Done button
+KeyboardToolbarField(
+  child: TextField(
+    keyboardType: TextInputType.number,
+  ),
+)
+
+// Hides Done button (for text fields)
+KeyboardToolbarField(
+  showToolbar: false,
+  child: TextField(
+    keyboardType: TextInputType.text,
+  ),
+)
+```
+
+### Manual Control
+
+```dart
+// Show toolbar
 TextField(
   keyboardType: TextInputType.number,
   onTap: () => KeyboardToolbar.show(),
 )
-```
 
-### With TextFormField
-
-```dart
-TextFormField(
-  keyboardType: TextInputType.number,
-  onTap: () => KeyboardToolbar.show(),
-  decoration: InputDecoration(labelText: 'Amount'),
+// Hide toolbar
+TextField(
+  onTap: () => KeyboardToolbar.hide(),
 )
 ```
 
+## Platform Support
+
+| Platform | Support |
+|----------|---------|
+| iOS (iPhone) | ✅ Full support |
+| iOS (iPad) | ⏭️ Skipped (has built-in Done) |
+| Android | ➖ No-op (safe to call) |
+
 ## Localization
 
-The Done button automatically displays in the system language (e.g., "Done", "완료", "完了").
+The Done button uses system language automatically.
 
-To enable this, add the following to your `ios/Runner/Info.plist`:
+Add to `ios/Runner/Info.plist`:
 
 ```xml
 <key>CFBundleAllowMixedLocalizations</key>
 <true/>
 ```
-
-## Notes
-
-- **One-shot behavior**: The toolbar only appears for the immediately following keyboard. Call `show()` each time the TextField is tapped.
-- **Rotation**: Toolbar automatically persists when device rotates while keyboard is visible.
-- **iPad**: Automatically skipped. iPad number keyboards have a built-in Done button.
-- **Android**: Safe to call on Android - the method does nothing (no-op).
-- **Timing**: Call `show()` in `onTap`, not in `onFocusChange`. The method must be called before the keyboard appears.
