@@ -12,7 +12,7 @@ https://github.com/user-attachments/assets/28802bed-ecb5-403e-9bba-bccda5c19620
 
 ```yaml
 dependencies:
-  keyboard_done_button_ios: ^0.0.1
+  keyboard_done_button_ios: ^0.0.2
 ```
 
 ## Usage

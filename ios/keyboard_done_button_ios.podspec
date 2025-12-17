@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'keyboard_done_button_ios'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = 'A Flutter plugin to show Done button toolbar above iOS keyboard.'
   s.description      = <<-DESC
 A Flutter plugin that displays a Done button toolbar above the iOS keyboard,
