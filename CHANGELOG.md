@@ -1,3 +1,11 @@
+## 0.0.4
+
+* Add demo GIF to repository for pub.dev compatibility
+
+## 0.0.3
+
+* Add demo GIF to README
+
 ## 0.0.2
 
 * Add `KeyboardToolbarField` widget for declarative toolbar management
