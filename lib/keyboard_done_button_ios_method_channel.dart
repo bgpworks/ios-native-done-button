@@ -21,4 +21,9 @@ class MethodChannelKeyboardDoneButtonIos extends KeyboardDoneButtonIosPlatform {
   Future<void> showDoneButton() async {
     await methodChannel.invokeMethod<void>('showDoneButton');
   }
+
+  @override
+  Future<void> hideDoneButton() async {
+    await methodChannel.invokeMethod<void>('hideDoneButton');
+  }
 }

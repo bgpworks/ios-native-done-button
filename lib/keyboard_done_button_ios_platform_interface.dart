@@ -31,4 +31,8 @@ abstract class KeyboardDoneButtonIosPlatform extends PlatformInterface {
   Future<void> showDoneButton() {
     throw UnimplementedError('showDoneButton() has not been implemented.');
   }
+
+  Future<void> hideDoneButton() {
+    throw UnimplementedError('hideDoneButton() has not been implemented.');
+  }
 }

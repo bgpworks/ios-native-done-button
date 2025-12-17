@@ -35,6 +35,9 @@ public class KeyboardDoneButtonIosPlugin: NSObject, FlutterPlugin {
     case "showDoneButton":
       showDoneButton()
       result(true)
+    case "hideDoneButton":
+      hideDoneButton()
+      result(true)
     default:
       result(FlutterMethodNotImplemented)
     }
@@ -70,18 +73,30 @@ public class KeyboardDoneButtonIosPlugin: NSObject, FlutterPlugin {
     pendingToolbarRequest = true
   }
 
+  private func hideDoneButton() {
+    guard UIDevice.current.userInterfaceIdiom != .pad else { return }  // Skip iPad
+    pendingToolbarRequest = false
+    isToolbarActive = false
+    hideToolbar()
+  }
+
   // MARK: - ⌨️ Keyboard Handlers ------------------------------------------ //
 
   @objc private func keyboardWillShow(_ notification: Notification) {
+    guard
+      let keyboardFrameEnd = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
+        as? CGRect
+    else { return }
+
     // Detect rotation by comparing screen bounds
     let currentScreenBounds = UIScreen.main.bounds
     let didRotate =
       isToolbarActive && lastScreenBounds != .zero && lastScreenBounds != currentScreenBounds
-
-    // Show toolbar if: explicit request OR rotation while toolbar was active
-    let shouldShowToolbar = pendingToolbarRequest || didRotate
-    pendingToolbarRequest = false
     lastScreenBounds = currentScreenBounds
+
+    // Show toolbar if: explicit request OR rotation OR toolbar already active
+    let shouldShowToolbar = pendingToolbarRequest || didRotate || isToolbarActive
+    pendingToolbarRequest = false
 
     guard shouldShowToolbar else {
       isToolbarActive = false
@@ -90,8 +105,6 @@ public class KeyboardDoneButtonIosPlugin: NSObject, FlutterPlugin {
     }
 
     guard
-      let keyboardFrameEnd = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
-        as? CGRect,
       let animationDuration = notification.userInfo?[
         UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
       let animationCurveRaw = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey]
@@ -110,9 +123,6 @@ public class KeyboardDoneButtonIosPlugin: NSObject, FlutterPlugin {
   // ************************************************************************ //
 
   @objc private func keyboardWillHide(_ notification: Notification) {
-    // Note: Don't reset isToolbarActive here - it's needed for rotation detection
-    // It will be reset in keyboardWillShow if no rotation, or in doneButtonTapped
-
     let duration =
       notification.userInfo?[
         UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.25
