@@ -10,9 +10,9 @@ Pod::Spec.new do |s|
 A Flutter plugin that displays a Done button toolbar above the iOS keyboard,
 especially useful for number keypads that don't have a built-in Done button.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://www.boxhero.io'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'bgpworks' => 'bgpworks' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'

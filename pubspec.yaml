@@ -1,9 +1,9 @@
 name: keyboard_done_button_ios
 description: "A Flutter plugin that adds a Done button toolbar above iOS keyboard for number inputs."
 version: 0.0.1
-homepage: https://github.com/bgpworks/keyboard_done_button_ios
-repository: https://github.com/bgpworks/keyboard_done_button_ios
-issue_tracker: https://github.com/bgpworks/keyboard_done_button_ios/issues
+homepage: https://www.boxhero.io
+repository: https://github.com/bgpworks/ios-native-done-button
+issue_tracker: https://github.com/bgpworks/ios-native-done-button/issues
 topics:
   - keyboard
   - ios
